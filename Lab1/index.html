@@ -1,13 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab 1</title>
+    <meta charset="utf-8">
+    <title>Lab 1: Personal Portfolio</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #1e3a5f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #2c5282;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+        }
+
+        /* Hover requirement */
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        /* Current page highlight */
+        .active {
+            border-bottom: 3px solid #ffd700;
+        }
+
+        main {
+            display: flex;              /* REQUIRED FLEX */
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        .profile-pic {
+            width: 250px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .intro-text {
+            max-width: 400px;
+        }
+
+        footer {
+            background-color: #1e3a5f;
+            color: #cccccc;             /* Different color */
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;            /* Smaller font */
+            margin-top: 40px;
+        }
+
+        footer img {
+            width: 100px;
+            display: block;
+            margin: 10px auto;
+        }
+
+    </style>
 </head>
+
 <body>
-    
-    <h1>Lab 1</h1>
-    
+
+    <header>
+        <h1>Branden Woods</h1>
+    </header>
+
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact Me</a>
+    </nav>
+
+    <main>
+        <img src="img/branden_woods.png" alt="Branden Woods" class="profile-pic">
+
+        <div class="intro-text">
+            <h2>Welcome to My Portfolio</h2>
+            <p>
+                  What’s up, I’m Branden. I’m working my way deeper into the world of programming 
+                  and web development, building skills one project at a time.
+            </p>
+            <p>
+                 This site is part of my CST 336 class, but it also represents where I’m headed — 
+                 learning, improving, and turning ideas into something real.
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <img src="img/csumb_logo.png" alt="CSUMB Logo">
+        CST 336 Internet Programming | Branden Woods
+    </footer>
+
 </body>
+
 </html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Setting character encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Responsive layout -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Keeping Lab 1 in title -->
+    <title>Lab 1: About</title>
+
+    <style>
+
+        /* General page styling */
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Header */
+        header {
+            background-color: #1e3a5f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #2c5282;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        .active {
+            border-bottom: 3px solid #ffd700;
+        }
+
+        /* Main content */
+        main {
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #1e3a5f;
+            margin-bottom: 30px;
+        }
+
+        h3 {
+            color: #2c5282;
+            margin-top: 0;
+        }
+
+        /* Flex container */
+        .about-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* Card styling */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 320px;
+            border-top: 5px solid #2c5282;
+        }
+
+        ul {
+            line-height: 1.8;
+        }
+
+        ul strong {
+            color: #2c5282;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #2c5282;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #eef3f9;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e3a5f;
+            color: #cccccc;
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            margin-top: 60px;
+        }
+
+        footer img {
+            width: 100px;
+            display: block;
+            margin: 10px auto;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Branden Woods</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact Me</a>
+    </nav>
+
+    <main>
+
+        <h2>About Me</h2>
+
+        <div class="about-container">
+
+            <!-- Personal section -->
+            <div class="card">
+                <h3>Things About Me</h3>
+                <ul>
+                    <li><strong>Programming:</strong> I’m developing a strong foundation in programming through structured coursework and applied projects.</li>
+                    <li><strong>Career Path:</strong> I work in healthcare program management while actively transitioning further into software development and technical roles.</li>
+                    <li><strong>Learning Approach:</strong> I prefer hands-on learning and strengthening my skills by building complete, functional projects.</li>
+                    <li><strong>Outdoors:</strong> I enjoy hiking and snowboarding when I get the opportunity.</li>
+                    <li><strong>Relaxing:</strong> I like unwinding by listening to good music and taking time to reset.</li>
+                </ul>
+            </div>
+
+            <!-- Programming experience section -->
+            <div class="card">
+                <h3>Programming Background</h3>
+                <table>
+                    <tr>
+                        <th>Programming Language</th>
+                        <th>Experience</th>
+                    </tr>
+                    <tr>
+                        <td>Java</td>
+                        <td>Completed multiple academic projects focused on object-oriented programming, algorithmic thinking, and structured problem-solving.</td>
+                    </tr>
+                    <tr>
+                        <td>Python</td>
+                        <td>Applied Python in coursework and independent exercises to strengthen logical reasoning and code organization.</td>
+                    </tr>
+                    <tr>
+                        <td>C</td>
+                        <td>Studied low-level programming concepts including memory management and system-level execution.</td>
+                    </tr>
+                    <tr>
+                        <td>Assembly</td>
+                        <td>Explored machine-level instruction processing and gained foundational understanding of how computers execute operations.</td>
+                    </tr>
+                    <tr>
+                        <td>HTML / CSS</td>
+                        <td>Building structured and styled web pages in this course, focusing on layout, responsiveness, and visual presentation.</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <img src="img/csumb_logo.png" alt="CSUMB Logo">
+        CST 336 Internet Programming | Branden Woods
+    </footer>
+
+</body>
+
+</html>

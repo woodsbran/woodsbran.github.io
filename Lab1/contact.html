@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Setting character encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Making the page responsive on different screen sizes -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Keeping Lab 1 in the title as required -->
+    <title>Lab 1: Contact</title>
+
+    <style>
+
+        /* General page styling */
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Header */
+        header {
+            background-color: #1e3a5f;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #2c5282;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+        }
+
+        /* Hover effect (required) */
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        /* Highlighting the current page */
+        .active {
+            border-bottom: 3px solid #ffd700;
+        }
+
+        /* Main content */
+        main {
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-top: 0;
+            color: #333;
+        }
+
+        /* Card styling to match the other pages */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid #2c5282;
+            margin-top: 20px;
+        }
+
+        /* Centering the Google Form */
+        .form-wrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Making the iframe fit better on the page */
+        iframe {
+            width: 100%;
+            max-width: 640px;
+            height: 961px;
+            border: 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1e3a5f;
+            color: #cccccc;
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            margin-top: 60px;
+        }
+
+        footer img {
+            width: 100px;
+            display: block;
+            margin: 10px auto;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Page header -->
+    <header>
+        <h1>Branden Woods</h1>
+    </header>
+
+    <!-- Navigation menu (same on every page) -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact Me</a>
+    </nav>
+
+    <!-- Main content -->
+    <main>
+
+        <h2>Contact Me</h2>
+        <p>
+            If you want to reach out, fill out the form below and I’ll get back to you.
+        </p>
+
+        <!-- I’m placing the Google Form inside a card so it matches the site style -->
+        <div class="card">
+            <div class="form-wrap">
+
+                <!-- Embedded Google Form (Required by Rubric) -->
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSffIhKAsUW4NcyS6Sn3w9CdCnGu-lEi8y-rDjb9TsgCbRTc0w/viewform?embedded=true"
+                    width="640"
+                    height="961"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0">
+                    Loading…
+                </iframe>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <img src="img/csumb_logo.png" alt="CSUMB Logo">
+        CST 336 Internet Programming | Branden Woods
+    </footer>
+
+</body>
+
+</html>
