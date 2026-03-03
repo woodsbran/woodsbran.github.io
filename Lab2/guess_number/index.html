@@ -1,22 +1,47 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title> Guess a Number </title>
-        <meta charset="utf-8">
-    </head>
-    <body>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Guess a Number</title>
+</head>
 
-        <header>
-            <h1>Guess the Number!</h1>
-            <h2>Guess a number between 1 and 99 in seven attempts!</h2>
-        </header>
-        <br>
-        <div id="main">
-          Enter a guess: 
-          <input type="text" id="playerGuess" size="5">         
-          <button id="guessBtn"> Guess </button> <br>
-          <button id="resetBtn"> Reset </button> 
-        </div>
-        
-    </body>
+<body>
+
+  <header>
+    <h1>Guess the Number!</h1>
+    <h2>Guess a number between 1 and 99 in seven attempts!</h2>
+  </header>
+
+  <br>
+
+  <div id="main">
+    Enter a guess:
+    <input type="text" id="playerGuess" size="5">
+
+    <button id="guessBtn">Guess</button>
+    <br>
+
+    <button id="resetBtn">Reset</button>
+
+    <div id="attemptsLeft"></div>
+
+    <div>
+        Wins: <span id="wins">0</span> |
+        Losses: <span id="losses">0</span>
+    </div>
+
+    <!-- REQUIRED: place to show feedback messages (range errors, high/low, win/lose) -->
+    <div id="feedback"></div>
+
+    <!-- REQUIRED: place to show previous guesses -->
+    <div>
+      Previous Guesses:
+      <span id="guesses"></span>
+    </div>
+  </div>
+
+  <!-- REQUIRED: connect your external JavaScript file -->
+  <script src="js/script.js"></script>
+
+</body>
 </html>
