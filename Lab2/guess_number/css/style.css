@@ -1,81 +1,118 @@
 /* =========================================
-   Lab 2 - Guess the Number (Style Sheet)
+   Lab 2 - Guess the Number 
    ========================================= */
 
-/* Page background */
+/* Background + page layout */
 body {
   margin: 0;
   padding: 0;
 
-  /* Put your background image in guess_number/img/bg.jpg */
-  background-image: url("../img/bg.jpg");
+  font-family: Arial, Helvetica, sans-serif;
+
+  /* Your background image */
+  background-image: url("../img/bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  /* Basic font */
-  font-family: Arial, Helvetica, sans-serif;
-
-  /* Center the content */
+  /* Center everything nicely */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Header text readable on background */
+/* Header "card" */
 header {
+  margin-top: 40px;
   text-align: center;
-  margin-top: 30px;
-  padding: 12px 18px;
 
-  /* Solid/semi-solid background so text stands out */
-  background: rgba(0, 0, 0, 0.55);
+  padding: 22px 28px;
+  width: min(820px, 90%);
+
   color: white;
-  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.55);
+
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
-/* Main game “card” */
+header h1 {
+  margin: 0;
+  font-size: 44px;
+}
+
+header h2 {
+  margin: 12px 0 0;
+  font-size: 22px;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+/* Main game card */
 #main {
-  margin-top: 25px;
+  margin-top: 28px;
   width: min(520px, 90%);
-  padding: 18px;
+  padding: 22px;
 
-  /* Solid background so inputs/text are readable */
-  background: rgba(255, 255, 255, 0.88);
-  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
 }
 
-/* Textbox */
+/* Input */
 #playerGuess {
-  padding: 8px;
+  padding: 10px;
   font-size: 16px;
-  margin-left: 8px;
+  width: 90px;
+  margin-left: 10px;
+
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  outline: none;
+}
+
+#playerGuess:focus {
+  border-color: #555;
 }
 
 /* Buttons */
 button {
   margin-top: 12px;
+  margin-right: 8px;
+
   padding: 10px 14px;
   font-size: 15px;
-  cursor: pointer;
+
   border-radius: 10px;
-  border: 1px solid #333;
+  border: 1px solid #222;
+  background: white;
+
+  cursor: pointer;
 }
 
-/* Spacing for feedback */
-#feedback {
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* Feedback + scoreboard spacing */
+#attemptsLeft {
   margin-top: 14px;
   font-weight: bold;
 }
 
-/* Attempts / scoreboard spacing */
-#attemptsLeft {
-  margin-top: 12px;
+#wins,
+#losses {
   font-weight: bold;
 }
 
-/* Previous guesses line */
+#feedback {
+  margin-top: 14px;
+  font-weight: bold;
+  min-height: 22px; /* keeps layout from jumping */
+}
+
 #guesses {
   font-weight: bold;
 }
