@@ -1,0 +1,81 @@
+/* =========================================
+   Lab 2 - Guess the Number (Style Sheet)
+   ========================================= */
+
+/* Page background */
+body {
+  margin: 0;
+  padding: 0;
+
+  /* Put your background image in guess_number/img/bg.jpg */
+  background-image: url("../img/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Basic font */
+  font-family: Arial, Helvetica, sans-serif;
+
+  /* Center the content */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header text readable on background */
+header {
+  text-align: center;
+  margin-top: 30px;
+  padding: 12px 18px;
+
+  /* Solid/semi-solid background so text stands out */
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+  border-radius: 12px;
+}
+
+/* Main game “card” */
+#main {
+  margin-top: 25px;
+  width: min(520px, 90%);
+  padding: 18px;
+
+  /* Solid background so inputs/text are readable */
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 14px;
+}
+
+/* Textbox */
+#playerGuess {
+  padding: 8px;
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+/* Buttons */
+button {
+  margin-top: 12px;
+  padding: 10px 14px;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid #333;
+}
+
+/* Spacing for feedback */
+#feedback {
+  margin-top: 14px;
+  font-weight: bold;
+}
+
+/* Attempts / scoreboard spacing */
+#attemptsLeft {
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+/* Previous guesses line */
+#guesses {
+  font-weight: bold;
+}
