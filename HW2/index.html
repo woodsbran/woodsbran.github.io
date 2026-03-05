@@ -1,221 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic setup so the browser reads the page correctly -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Basic page setup -->
-  <!-- UTF-8 lets the page display characters correctly -->
-  <meta charset="UTF-8">
-
-  <!-- Makes the page scale correctly on phones/tablets -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Title that appears in the browser tab -->
+  <!-- Shows in the browser tab -->
   <title>HW2: US Geography Quiz</title>
 
-  <!-- Bootstrap CSS -->
-  <!-- I'm using Bootstrap so the quiz automatically has a clean layout -->
+  <!-- Bootstrap makes everything look clean without me writing tons of CSS -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
-
 </head>
 
 <body class="bg-light">
-
-  <!-- Main container that centers the quiz and adds spacing -->
   <div class="container py-4">
 
-    <!-- Page header -->
-    <header class="mb-4 text-center">
+    <!-- Page title + quick description -->
+    <header class="mb-3 text-center">
       <h1 class="fw-bold">US Geography Quiz</h1>
-
-      <!-- Small description under the title -->
-      <p class="text-muted mb-0">
-        10 questions • Total: 100 points
-      </p>
+      <p class="text-muted mb-0">10 questions • Total: 100 points</p>
     </header>
 
-
-    <!-- This section shows how many times the quiz has been taken -->
-    <!-- The value will come from Web Storage (localStorage) using JavaScript -->
-    <div class="alert alert-info d-flex justify-content-between align-items-center" role="status">
-
-      <!-- This span will update dynamically -->
-      <span>
-        <strong>Total times taken:</strong>
-        <span id="attemptsCount">0</span>
-      </span>
-
-      <!-- Button that lets us reset the attempt counter -->
-      <button id="resetAttemptsBtn"
-              class="btn btn-sm btn-outline-dark"
-              type="button">
-        Reset Attempts
-      </button>
-
+    <!-- ✅ UI Polish: Progress bar (shows how many questions are filled in) -->
+    <div class="progress mb-3" style="height: 10px;">
+      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;"></div>
     </div>
 
+    <!-- Attempts counter (Web Storage) -->
+    <!-- JS updates attemptsCount using localStorage -->
+    <div class="alert alert-info d-flex justify-content-between align-items-center" role="status">
+      <span><strong>Total times taken:</strong> <span id="attemptsCount">0</span></span>
+      <button id="resetAttemptsBtn" class="btn btn-sm btn-outline-dark" type="button">
+        Reset Attempts
+      </button>
+    </div>
 
     <!-- Main quiz form -->
-    <!-- All questions are inside this form -->
     <form id="quizForm" class="vstack gap-3">
 
-
-      <!-- ========================= -->
-      <!-- QUESTION 1 -->
-      <!-- ========================= -->
-
+      <!-- Q1 (Radio) -->
       <section class="card shadow-sm">
-
         <div class="card-body">
-
-          <!-- Question text -->
-          <h2 class="h5">
-            1) What is the capital of California?
-          </h2>
-
-          <!-- Radio buttons allow only ONE answer -->
+          <h2 class="h5">1) What is the capital of California?</h2>
 
           <div class="form-check">
-            <input class="form-check-input"
-                   type="radio"
-                   name="q1"
-                   id="q1a"
-                   value="Los Angeles">
-
-            <!-- Label improves accessibility and lets user click the text -->
-            <label class="form-check-label" for="q1a">
-              Los Angeles
-            </label>
+            <input class="form-check-input" type="radio" name="q1" id="q1a" value="Los Angeles">
+            <label class="form-check-label" for="q1a">Los Angeles</label>
           </div>
-
 
           <div class="form-check">
-            <input class="form-check-input"
-                   type="radio"
-                   name="q1"
-                   id="q1b"
-                   value="Sacramento">
-
-            <label class="form-check-label" for="q1b">
-              Sacramento
-            </label>
+            <input class="form-check-input" type="radio" name="q1" id="q1b" value="Sacramento">
+            <label class="form-check-label" for="q1b">Sacramento</label>
           </div>
-
 
           <div class="form-check">
-            <input class="form-check-input"
-                   type="radio"
-                   name="q1"
-                   id="q1c"
-                   value="San Diego">
-
-            <label class="form-check-label" for="q1c">
-              San Diego
-            </label>
+            <input class="form-check-input" type="radio" name="q1" id="q1c" value="San Diego">
+            <label class="form-check-label" for="q1c">San Diego</label>
           </div>
 
+          <!-- Feedback area (JS updates this after submit) -->
+          <div class="mt-3 d-flex align-items-center gap-2">
+            <img id="q1img" src="" alt="" class="d-none" style="width:28px;height:28px;">
+            <div id="q1fb" class="small"></div>
+          </div>
+        </div>
+      </section>
 
-          <!-- This area will show feedback after the quiz is submitted -->
-          <!-- JavaScript will change the image and message here -->
+      <!-- Q2 (Radio) -->
+      <section class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">2) Which state is known as the “Sunshine State”?</h2>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="q2" id="q2a" value="Florida">
+            <label class="form-check-label" for="q2a">Florida</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="q2" id="q2b" value="Arizona">
+            <label class="form-check-label" for="q2b">Arizona</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="q2" id="q2c" value="Hawaii">
+            <label class="form-check-label" for="q2c">Hawaii</label>
+          </div>
 
           <div class="mt-3 d-flex align-items-center gap-2">
-
-            <!-- Image showing correct/incorrect -->
-            <img id="q1img"
-                 src=""
-                 alt=""
-                 class="d-none"
-                 style="width:28px;height:28px;">
-
-            <!-- Text feedback -->
-            <div id="q1fb" class="small"></div>
-
+            <img id="q2img" src="" alt="" class="d-none" style="width:28px;height:28px;">
+            <div id="q2fb" class="small"></div>
           </div>
-
         </div>
-
       </section>
 
+      <!-- Q3 (Radio) -->
+      <section class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">3) Which state has the most people (largest population)?</h2>
 
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="q3" id="q3a" value="California">
+            <label class="form-check-label" for="q3a">California</label>
+          </div>
 
-      <!-- ================================================= -->
-      <!-- Questions 2 – 10 follow the exact same structure  -->
-      <!-- I used the same pattern so the JavaScript logic   -->
-      <!-- can easily update the feedback for each question  -->
-      <!-- ================================================= -->
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="q3" id="q3b" value="Texas">
+            <label class="form-check-label" for="q3b">Texas</label>
+          </div>
 
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="q3" id="q3c" value="New York">
+            <label class="form-check-label" for="q3c">New York</label>
+          </div>
 
+          <div class="mt-3 d-flex align-items-center gap-2">
+            <img id="q3img" src="" alt="" class="d-none" style="width:28px;height:28px;">
+            <div id="q3fb" class="small"></div>
+          </div>
+        </div>
+      </section>
 
-      <!-- SUBMIT BUTTON -->
+      <!-- Q4 (Radio) - choices inserted in random order by JS -->
+      <section class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">4) Which state is the largest by land area?</h2>
 
+          <!-- JS fills this with randomized radio options -->
+          <div id="q4choices"></div>
+
+          <div class="mt-3 d-flex align-items-center gap-2">
+            <img id="q4img" src="" alt="" class="d-none" style="width:28px;height:28px;">
+            <div id="q4fb" class="small"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q5 (Radio) -->
+      <section class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">5) The Grand Canyon is located in which state?</h2>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="q5" id="q5a" value="Arizona">
+            <label class="form-check-label" for="q5a">Arizona</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="q5" id="q5b" value="Nevada">
+            <label class="form-check-label" for="q5b">Nevada</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="q5" id="q5c" value="Utah">
+            <label class="form-check-label" for="q5c">Utah</label>
+          </div>
+
+          <div class="mt-3 d-flex align-items-center gap-2">
+            <img id="q5img" src="" alt="" class="d-none" style="width:28px;height:28px;">
+            <div id="q5fb" class="small"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q6 (Checkboxes) -->
+      <section class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">6) Select all states that border the Pacific Ocean.</h2>
+          <p class="text-muted small mb-2">(Choose all that apply)</p>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="q6" id="q6a" value="California">
+            <label class="form-check-label" for="q6a">California</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="q6" id="q6b" value="Oregon">
+            <label class="form-check-label" for="q6b">Oregon</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="q6" id="q6c" value="Washington">
+            <label class="form-check-label" for="q6c">Washington</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="q6" id="q6d" value="Nevada">
+            <label class="form-check-label" for="q6d">Nevada</label>
+          </div>
+
+          <div class="mt-3 d-flex align-items-center gap-2">
+            <img id="q6img" src="" alt="" class="d-none" style="width:28px;height:28px;">
+            <div id="q6fb" class="small"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q7 (Dropdown) -->
+      <section class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">7) Choose the state that contains New Orleans.</h2>
+
+          <label for="q7" class="form-label">State:</label>
+          <select id="q7" class="form-select" aria-label="Select a state for question 7">
+            <option value="">-- Select one --</option>
+            <option value="Louisiana">Louisiana</option>
+            <option value="Mississippi">Mississippi</option>
+            <option value="Georgia">Georgia</option>
+          </select>
+
+          <div class="mt-3 d-flex align-items-center gap-2">
+            <img id="q7img" src="" alt="" class="d-none" style="width:28px;height:28px;">
+            <div id="q7fb" class="small"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q8 (Text input) -->
+      <section class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">8) Type the capital of Texas.</h2>
+
+          <label for="q8" class="form-label">Your answer:</label>
+          <input id="q8" class="form-control" type="text" placeholder="Example: Austin" />
+
+          <div class="mt-3 d-flex align-items-center gap-2">
+            <img id="q8img" src="" alt="" class="d-none" style="width:28px;height:28px;">
+            <div id="q8fb" class="small"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q9 (Number input) -->
+      <section class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">9) How many states are in the United States?</h2>
+
+          <label for="q9" class="form-label">Number:</label>
+          <input id="q9" class="form-control" type="number" min="1" max="60" />
+
+          <div class="mt-3 d-flex align-items-center gap-2">
+            <img id="q9img" src="" alt="" class="d-none" style="width:28px;height:28px;">
+            <div id="q9fb" class="small"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Q10 (Range slider) -->
+      <section class="card shadow-sm">
+        <div class="card-body">
+          <h2 class="h5">10) How confident are you about US geography?</h2>
+
+          <label for="q10" class="form-label">
+            Confidence: <span id="q10val" class="fw-bold">5</span>/10
+          </label>
+          <input id="q10" class="form-range" type="range" min="1" max="10" value="5" />
+
+          <div class="mt-3 d-flex align-items-center gap-2">
+            <img id="q10img" src="" alt="" class="d-none" style="width:28px;height:28px;">
+            <div id="q10fb" class="small"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Buttons -->
       <div class="d-grid gap-2">
-
-        <!-- When this button is clicked the quiz is graded -->
-        <button class="btn btn-primary btn-lg" type="submit">
-          Submit Quiz
-        </button>
-
-        <!-- Reset button clears answers and feedback -->
-        <button class="btn btn-outline-secondary"
-                id="resetBtn"
-                type="button">
-          Reset Answers
-        </button>
-
+        <button class="btn btn-primary btn-lg" type="submit">Submit Quiz</button>
+        <button class="btn btn-outline-secondary" id="resetBtn" type="button">Reset Answers</button>
       </div>
 
-
-
-      <!-- TOTAL SCORE DISPLAY -->
-
+      <!-- Total Score -->
       <section class="card shadow-sm">
-
         <div class="card-body text-center">
-
-          <!-- Score section title -->
           <h2 class="h4 mb-1">Your Total Score</h2>
+          <p class="display-6 mb-2"><span id="totalScore">0</span>/100</p>
 
-          <!-- JavaScript will update this value -->
-          <p class="display-6 mb-2">
-            <span id="totalScore">0</span>/100
-          </p>
-
-          <!-- This congratulatory message only appears if score > 80 -->
-          <div id="congrats"
-               class="alert alert-success d-none"
-               role="alert">
-
+          <!-- Shows only when score > 80 -->
+          <div id="congrats" class="alert alert-success d-none" role="alert">
             🎉 Congrats! You scored above 80!
-
           </div>
-
         </div>
-
       </section>
-
 
     </form>
 
-
-
-    <!-- Page footer -->
     <footer class="text-center text-muted mt-4">
-      <small>
-        HW2 - CST336 | US Geography Quiz
-      </small>
+      <small>HW2 - CST336 | US Geography Quiz</small>
     </footer>
-
-
   </div>
 
-
-
-  <!-- JavaScript file that runs the quiz logic -->
-  <!-- This handles scoring, feedback, storage, etc -->
+  <!-- JS controls grading, feedback, attempts, randomizing, etc -->
   <script src="js/quiz.js"></script>
-
-
 </body>
 </html>
