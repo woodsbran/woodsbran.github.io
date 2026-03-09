@@ -38,7 +38,7 @@
                     <label for="username" class="form-label">Username</label>
 
                     <!-- Textbox where the user types a username -->
-                    <input type="text" id="username" class="form-control">
+                    <input type="text" id="username" name="username" class="form-control">
 
                     <!-- Message area to show if username is available or not -->
                     <small id="usernameMsg"></small>
@@ -49,7 +49,7 @@
                     <label for="password" class="form-label">Password</label>
 
                     <!-- Password box -->
-                    <input type="password" id="password" class="form-control">
+                    <input type="password" id="password" name="password" class="form-control">
 
                     <!-- This is where I’ll show the suggested password -->
                     <small id="passwordHint" class="text-primary"></small>
@@ -63,7 +63,7 @@
                     <label for="retypePassword" class="form-label">Retype Password</label>
 
                     <!-- User types password again here -->
-                    <input type="password" id="retypePassword" class="form-control">
+                    <input type="password" id="retypePassword" name="retypePassword" class="form-control">
 
                     <!-- This is where I’ll show the passwords do not match error -->
                     <div id="retypePasswordError" class="text-danger"></div>
@@ -74,7 +74,7 @@
                     <label for="zip" class="form-label">Zip Code</label>
 
                     <!-- User enters zip code here -->
-                    <input type="text" id="zip" class="form-control">
+                    <input type="text" id="zip" name="zip" class="form-control">
 
                     <!-- If zip is not found, I’ll show that message here -->
                     <small id="zipError" class="text-danger"></small>
@@ -112,7 +112,7 @@
                         The states will be loaded from an API when the page loads.
                         I only put the default option here for now.
                     -->
-                    <select id="state" class="form-select">
+                    <select id="state" name="state" class="form-select">
                         <option value="">Select a State</option>
                     </select>
                 </div>
@@ -124,7 +124,7 @@
                     <!--
                         The counties will be loaded after a state is selected.
                     -->
-                    <select id="county" class="form-select">
+                    <select id="county" name="county" class="form-select">
                         <option value="">Select a County</option>
                     </select>
                 </div>
