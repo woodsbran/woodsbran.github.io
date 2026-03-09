@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- This is the title that shows on the browser tab -->
+    <title>Lab 3: Sign Up Page</title>
+
+    <!-- Bootstrap so the page already has a cleaner style -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- My own CSS file for extra styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main container to center everything and give spacing -->
+    <div class="container mt-5 mb-5">
+
+        <!-- This is the main sign up box/card -->
+        <div class="signup-box mx-auto p-4 shadow rounded">
+
+            <!-- Main heading -->
+            <h1 class="text-center mb-4">Sign Up</h1>
+
+            <!--
+                This is the form.
+                I gave it an id so JavaScript can grab it easily.
+                action="welcome.html" means if everything is valid,
+                it should go to welcome.html after submit.
+            -->
+            <form id="signupForm" action="welcome.html" method="GET">
+
+                <!-- Username section -->
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+
+                    <!-- Textbox where the user types a username -->
+                    <input type="text" id="username" class="form-control">
+
+                    <!-- Message area to show if username is available or not -->
+                    <small id="usernameMsg"></small>
+                </div>
+
+                <!-- Password section -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+
+                    <!-- Password box -->
+                    <input type="password" id="password" class="form-control">
+
+                    <!-- This is where I’ll show the suggested password -->
+                    <small id="passwordHint" class="text-primary"></small>
+
+                    <!-- This is where I’ll show password length error -->
+                    <div id="passwordError" class="text-danger"></div>
+                </div>
+
+                <!-- Retype password section -->
+                <div class="mb-3">
+                    <label for="retypePassword" class="form-label">Retype Password</label>
+
+                    <!-- User types password again here -->
+                    <input type="password" id="retypePassword" class="form-control">
+
+                    <!-- This is where I’ll show the passwords do not match error -->
+                    <div id="retypePasswordError" class="text-danger"></div>
+                </div>
+
+                <!-- Zip code section -->
+                <div class="mb-3">
+                    <label for="zip" class="form-label">Zip Code</label>
+
+                    <!-- User enters zip code here -->
+                    <input type="text" id="zip" class="form-control">
+
+                    <!-- If zip is not found, I’ll show that message here -->
+                    <small id="zipError" class="text-danger"></small>
+                </div>
+
+                <!-- City display -->
+                <div class="mb-3">
+                    <label class="form-label">City</label>
+
+                    <!-- This box gets updated from the zip API -->
+                    <div id="city" class="output-box"></div>
+                </div>
+
+                <!-- Latitude display -->
+                <div class="mb-3">
+                    <label class="form-label">Latitude</label>
+
+                    <!-- This box gets updated from the zip API -->
+                    <div id="latitude" class="output-box"></div>
+                </div>
+
+                <!-- Longitude display -->
+                <div class="mb-3">
+                    <label class="form-label">Longitude</label>
+
+                    <!-- This box gets updated from the zip API -->
+                    <div id="longitude" class="output-box"></div>
+                </div>
+
+                <!-- State dropdown -->
+                <div class="mb-3">
+                    <label for="state" class="form-label">State</label>
+
+                    <!--
+                        The states will be loaded from an API when the page loads.
+                        I only put the default option here for now.
+                    -->
+                    <select id="state" class="form-select">
+                        <option value="">Select a State</option>
+                    </select>
+                </div>
+
+                <!-- County dropdown -->
+                <div class="mb-4">
+                    <label for="county" class="form-label">County</label>
+
+                    <!--
+                        The counties will be loaded after a state is selected.
+                    -->
+                    <select id="county" class="form-select">
+                        <option value="">Select a County</option>
+                    </select>
+                </div>
+
+                <!-- Submit button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- My JavaScript file goes at the bottom so the page loads first -->
+    <script src="script.js"></script>
+</body>
+</html>
