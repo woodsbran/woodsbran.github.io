@@ -1,0 +1,70 @@
+/* This styles the full page background */
+body {
+    background: linear-gradient(to right, #dbeafe, #eff6ff);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* This styles the white sign up card in the middle */
+.signup-box {
+    max-width: 650px;
+    background-color: white;
+    border: 1px solid #dbeafe;
+}
+
+/* Main page title styling */
+h1 {
+    color: #1d4ed8;
+    font-weight: bold;
+}
+
+/* Labels above each field */
+.form-label {
+    font-weight: 600;
+    color: #1e3a8a;
+}
+
+/* These are the display boxes for city, latitude, longitude */
+.output-box {
+    min-height: 38px;
+    padding: 8px 12px;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    color: #334155;
+}
+
+/* Username status message styling */
+#usernameMsg {
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* Suggested password text styling */
+#passwordHint {
+    display: block;
+    margin-top: 5px;
+}
+
+/* Error messages */
+.text-danger {
+    font-size: 0.95rem;
+}
+
+/* Main submit button styling */
+button.btn-primary {
+    background-color: #2563eb;
+    border: none;
+}
+
+/* Submit button hover effect */
+button.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+/* Blue glow when user clicks into a textbox or dropdown */
+.form-control:focus,
+.form-select:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 0.2rem rgba(96, 165, 250, 0.25);
+}
