@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title on the browser tab -->
+    <title>HW 3: Rick and Morty Character Finder</title>
+
+    <!-- Linking my external CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!--
+        This is the main container for the whole page.
+        I'm keeping everything inside here so the page looks centered and organized.
+    -->
+    <main class="container">
+
+        <!-- Main title -->
+        <h1>Rick and Morty Character Finder</h1>
+
+        <!-- Small intro under the title -->
+        <p class="subtitle">
+            Search for Rick and Morty characters by name and species.
+        </p>
+
+        <!--
+            This is the form where the user enters search info.
+            I gave it an id so JavaScript can connect to it easily.
+        -->
+        <form id="searchForm">
+
+            <!-- Character name input -->
+            <label for="characterName">Character Name</label>
+            <input type="text" id="characterName" placeholder="ex: Rick">
+
+            <!-- Species input -->
+            <label for="species">Species</label>
+            <input type="text" id="species" placeholder="ex: Human">
+
+            <!-- Search button -->
+            <button type="submit">Search</button>
+
+            <!--
+                This is where I’ll show validation errors
+                like if the user leaves the character name blank.
+            -->
+            <p id="errorMsg"></p>
+        </form>
+
+        <!--
+            This is where the API results will show up.
+            JavaScript will fill this section with character cards.
+        -->
+        <section id="results"></section>
+
+    </main>
+
+    <!-- Linking my JavaScript file at the bottom so the page loads first -->
+    <script src="script.js"></script>
+</body>
+</html>
