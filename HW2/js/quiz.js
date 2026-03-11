@@ -14,8 +14,8 @@
 // ------------------------------
 // Image paths for right/wrong
 // ------------------------------
-const IMG_CORRECT = "../img/correct.png";
-const IMG_WRONG = "../img/wrong.png";
+const IMG_CORRECT = "img/correct.png";
+const IMG_WRONG = "img/wrong.png";
 
 // ------------------------------
 // Scoring
