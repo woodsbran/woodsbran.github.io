@@ -120,3 +120,12 @@ button:hover {
     color: #ffd166;
     font-size: 18px;
 }
+
+/* Footer styling for HW3 */
+footer{
+    text-align:center;
+    margin-top:40px;
+    padding:10px;
+    color:#dcdcdc;
+    font-size:14px;
+}
