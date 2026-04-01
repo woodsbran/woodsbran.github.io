@@ -1,4 +1,4 @@
-// I'm importing express to create my server
+// I'm importing express so I can create my server
 import express from "express";
 
 // I'm importing mysql so I can connect to my database
@@ -7,16 +7,19 @@ import mysql from "mysql2/promise";
 // I'm creating my express app
 const app = express();
 
-// I'm setting EJS so I can render pages
+// I'm telling express to use EJS
 app.set("view engine", "ejs");
 
-// This lets me use files like css and js from the public folder
+// This lets me use files from my public folder like css and js
 app.use(express.static("public"));
 
 // This lets me read form data from the page
 app.use(express.urlencoded({ extended: true }));
 
-// This is my database connection using the credentials I got
+// This lets me work with json when needed
+app.use(express.json());
+
+// This is my database connection
 const pool = mysql.createPool({
     host: "sql3.freesqldatabase.com",
     user: "sql3821835",
@@ -27,31 +30,32 @@ const pool = mysql.createPool({
     waitForConnections: true
 });
 
-// This is my home route
+// This is my main home route
 app.get("/", async (req, res) => {
     try {
-        // I'm grabbing whatever the user typed or selected from the form
+        // I'm grabbing the values the user entered in the search form
         const keyword = req.query.keyword || "";
         const category = req.query.category || "";
-        const authorId = req.query.authorId || "";
+        const author = req.query.author || "";
         const minLikes = req.query.minLikes || "";
         const maxLikes = req.query.maxLikes || "";
 
-        // I'm getting the list of categories from the database for the dropdown
+        // I'm getting all unique categories for the category dropdown
         const [categories] = await pool.query(`
             SELECT DISTINCT category
             FROM q_quotes
             ORDER BY category
         `);
 
-        // I'm getting the full author names from the database for the dropdown
+        // I'm getting all full author names for the datalist
         const [authors] = await pool.query(`
-            SELECT authorId, CONCAT(firstName, ' ', lastName) AS fullName
+            SELECT authorId,
+                   CONCAT(firstName, ' ', lastName) AS fullName
             FROM q_authors
             ORDER BY firstName, lastName
         `);
 
-        // This is my main query to get quotes and the author name together
+        // This is my main search query
         let sql = `
             SELECT q.quoteId,
                    q.quote,
@@ -65,7 +69,7 @@ app.get("/", async (req, res) => {
             WHERE 1
         `;
 
-        // I'm using this array to safely store the values for the query
+        // I'm using this array to safely hold the values for the query
         let params = [];
 
         // If the user typed a keyword, I'll search inside the quote text
@@ -80,19 +84,19 @@ app.get("/", async (req, res) => {
             params.push(category);
         }
 
-        // If the user picked an author, I'll filter by that author
-        if (authorId) {
-            sql += ` AND q.authorId = ?`;
-            params.push(authorId);
+        // If the user typed an author name, I'll search by the full author name
+        if (author) {
+            sql += ` AND CONCAT(a.firstName, ' ', a.lastName) LIKE ?`;
+            params.push(`%${author}%`);
         }
 
-        // If the user entered a minimum likes value, I'll filter for that
+        // If the user entered a minimum likes value, I'll use it
         if (minLikes) {
             sql += ` AND q.likes >= ?`;
             params.push(minLikes);
         }
 
-        // If the user entered a maximum likes value, I'll filter for that
+        // If the user entered a maximum likes value, I'll use it
         if (maxLikes) {
             sql += ` AND q.likes <= ?`;
             params.push(maxLikes);
@@ -111,26 +115,59 @@ app.get("/", async (req, res) => {
             quotes,
             keyword,
             category,
-            authorId,
+            author,
             minLikes,
             maxLikes
         });
 
     } catch (err) {
-        console.error(err);
+        console.error("Home route error:", err);
         res.send("Database error");
     }
 });
 
-// This is just a test route to make sure my database works
+// This route gets one author's full info for the modal
+app.get("/author/:authorId", async (req, res) => {
+    try {
+        // I'm getting the author id from the URL
+        const authorId = req.params.authorId;
+
+        // I'm pulling the full author info from the database
+        const [rows] = await pool.query(`
+            SELECT authorId,
+                   firstName,
+                   lastName,
+                   CONCAT(firstName, ' ', lastName) AS fullName,
+                   dob,
+                   dod,
+                   sex,
+                   profession,
+                   country,
+                   portrait,
+                   biography
+            FROM q_authors
+            WHERE authorId = ?
+        `, [authorId]);
+
+        // If the author isn't found, I'll return an error
+        if (rows.length === 0) {
+            return res.status(404).json({ error: "Author not found" });
+        }
+
+        // I'm sending the author back as json
+        res.json(rows[0]);
+
+    } catch (err) {
+        console.error("Author route error:", err);
+        res.status(500).json({ error: "Database error" });
+    }
+});
+
+// This is still my database test route
 app.get("/dbTest", async (req, res) => {
     try {
-        // I'm getting a few quotes from my database
         const [rows] = await pool.query("SELECT * FROM q_quotes LIMIT 5");
-
-        // I'm sending them to the browser
         res.send(rows);
-
     } catch (err) {
         console.error(err);
         res.send("Database error");
