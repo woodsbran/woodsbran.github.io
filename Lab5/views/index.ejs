@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5 - Quote Finder</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+    <h1>Famous Quote Finder</h1>
+
+    <form method="GET" action="/">
+        <div>
+            <label for="keyword">Keyword:</label>
+            <input type="text" id="keyword" name="keyword">
+        </div>
+
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="">All Categories</option>
+                <% categories.forEach(c => { %>
+                    <option value="<%= c.category %>"><%= c.category %></option>
+                <% }) %>
+            </select>
+        </div>
+
+        <div>
+            <label for="authorId">Author:</label>
+            <select id="authorId" name="authorId">
+                <option value="">All Authors</option>
+                <% authors.forEach(a => { %>
+                    <option value="<%= a.authorId %>"><%= a.fullName %></option>
+                <% }) %>
+            </select>
+        </div>
+
+        <div>
+            <label for="minLikes">Min Likes:</label>
+            <input type="number" id="minLikes" name="minLikes">
+        </div>
+
+        <div>
+            <label for="maxLikes">Max Likes:</label>
+            <input type="number" id="maxLikes" name="maxLikes">
+        </div>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <hr>
+
+    <h2>Results</h2>
+
+    <% if (quotes.length === 0) { %>
+        <p>No quotes to show yet.</p>
+    <% } %>
+
+</body>
+</html>
