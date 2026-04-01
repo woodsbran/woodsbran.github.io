@@ -1,55 +1,57 @@
-// I'm grabbing the modal body where the author info will go
-const authorInfo = document.getElementById("authorInfo");
+// This function runs when the user clicks an author's name
+async function loadAuthorInfo(authorId) {
+    // I'm grabbing the modal body where the author details will go
+    const authorInfo = document.getElementById("authorInfo");
 
-// I'm using event delegation so clicks on any author button will work reliably
-document.addEventListener("click", async (event) => {
-    const clickedAuthor = event.target.closest(".author-link");
-
-    // If the click wasn't on an author button, I'll stop here
-    if (!clickedAuthor) {
-        return;
-    }
-
-    // I'm getting the author id from the button
-    const authorId = clickedAuthor.dataset.authorid;
-
-    // I'm resetting the modal content while the data loads
+    // I'm showing a loading message first
     authorInfo.innerHTML = "<p>Loading author information...</p>";
 
     try {
-        // I'm calling my Express route to get the selected author's details
+        // I'm calling my Express route to get this author's details
         const response = await fetch(`/author/${authorId}`);
 
-        // If the response is bad, I'll throw an error
+        // If the response fails, I'll throw an error
         if (!response.ok) {
-            throw new Error("Could not load author data");
+            throw new Error("Could not load author information");
         }
 
+        // I'm converting the response into JSON
         const data = await response.json();
 
-        // If there isn't a date of death, I'll show N/A
+        // I'm handling cases where some values might be missing
         const deathDate = data.dod ? data.dod : "N/A";
 
-        // I'm converting the sex value into a clearer label
         const sexLabel =
             data.sex === "M" ? "Male" :
             data.sex === "F" ? "Female" :
             data.sex;
 
-        // If the portrait is missing, I'll show a fallback message
-        const portraitHtml = data.portrait
-            ? `<img src="${data.portrait}" alt="${data.fullName}" class="img-fluid rounded shadow author-image">`
-            : `<p>No portrait available.</p>`;
+        // I'm creating a local fallback just in case Albert's online image fails
+        const localAlbertFallback = "/images/albert-einstein.jpg";
 
-        // I'm placing all the full author info into the modal
+        // I'm building the image tag and using a fallback if the original image fails
+        let portraitHtml = "<p>No portrait available.</p>";
+
+        if (data.portrait) {
+            portraitHtml = `
+                <img
+                    src="${data.portrait}"
+                    alt="${data.fullName}"
+                    class="img-fluid rounded shadow author-image"
+                    onerror="this.onerror=null; this.src='${localAlbertFallback}';"
+                >
+            `;
+        }
+
+        // I'm placing all the full author details into the modal
         authorInfo.innerHTML = `
-            <div class="row">
-                <div class="col-md-4 text-center mb-3 mb-md-0">
+            <div class="row g-4 align-items-start">
+                <div class="col-md-4 text-center">
                     ${portraitHtml}
                 </div>
 
                 <div class="col-md-8">
-                    <h3>${data.fullName}</h3>
+                    <h3 class="author-name mb-3">${data.fullName}</h3>
                     <p><strong>Date of Birth:</strong> ${data.dob}</p>
                     <p><strong>Date of Death:</strong> ${deathDate}</p>
                     <p><strong>Sex:</strong> ${sexLabel}</p>
@@ -61,10 +63,11 @@ document.addEventListener("click", async (event) => {
         `;
     } catch (error) {
         console.error("Author modal error:", error);
+
         authorInfo.innerHTML = `
             <p class="text-danger">
                 Could not load author information.
             </p>
         `;
     }
-});
+}

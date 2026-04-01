@@ -13,55 +13,60 @@
 </head>
 <body>
 
-    <div class="container py-4">
-        <h1 class="text-center mb-4">Famous Quote Finder</h1>
+    <div class="container py-5">
+        <div class="hero-box text-center mb-4">
+            <h1 class="page-title mb-2">Famous Quote Finder</h1>
+            <p class="page-subtitle mb-0">
+                Search quotes by keyword, category, author name, or likes range.
+            </p>
+        </div>
 
         <!-- This is my search form -->
         <form method="GET" action="/" class="search-form">
-            <div class="mb-3">
-                <label for="keyword" class="form-label">Keyword:</label>
-                <input
-                    type="text"
-                    id="keyword"
-                    name="keyword"
-                    class="form-control"
-                    value="<%= keyword %>"
-                    placeholder="Search quote text"
-                >
-            </div>
-
-            <div class="mb-3">
-                <label for="category" class="form-label">Category:</label>
-                <select id="category" name="category" class="form-select">
-                    <option value="">All Categories</option>
-                    <% categories.forEach(c => { %>
-                        <option value="<%= c.category %>" <%= category === c.category ? "selected" : "" %>>
-                            <%= c.category %>
-                        </option>
-                    <% }) %>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="author" class="form-label">Author Name:</label>
-                <input
-                    type="text"
-                    id="author"
-                    name="author"
-                    class="form-control"
-                    list="authorList"
-                    value="<%= author %>"
-                    placeholder="Type an author's name"
-                >
-
-                <datalist id="authorList">
-                    <% authors.forEach(a => { %>
-                        <option value="<%= a.fullName %>"></option>
-                    <% }) %>
-                </datalist>
-            </div>
-
             <div class="row">
+                <div class="col-12 mb-3">
+                    <label for="keyword" class="form-label">Keyword:</label>
+                    <input
+                        type="text"
+                        id="keyword"
+                        name="keyword"
+                        class="form-control"
+                        value="<%= keyword %>"
+                        placeholder="Search quote text"
+                    >
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="category" class="form-label">Category:</label>
+                    <select id="category" name="category" class="form-select">
+                        <option value="">All Categories</option>
+                        <% categories.forEach(c => { %>
+                            <option value="<%= c.category %>" <%= category === c.category ? "selected" : "" %>>
+                                <%= c.category %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="author" class="form-label">Author Name:</label>
+                    <input
+                        type="text"
+                        id="author"
+                        name="author"
+                        class="form-control"
+                        list="authorList"
+                        value="<%= author %>"
+                        placeholder="Type an author's name"
+                    >
+
+                    <datalist id="authorList">
+                        <% authors.forEach(a => { %>
+                            <option value="<%= a.fullName %>"></option>
+                        <% }) %>
+                    </datalist>
+                </div>
+
                 <div class="col-md-6 mb-3">
                     <label for="minLikes" class="form-label">Min Likes:</label>
                     <input
@@ -70,6 +75,7 @@
                         name="minLikes"
                         class="form-control"
                         value="<%= minLikes %>"
+                        min="0"
                     >
                 </div>
 
@@ -81,42 +87,52 @@
                         name="maxLikes"
                         class="form-control"
                         value="<%= maxLikes %>"
+                        min="0"
                     >
                 </div>
             </div>
 
-            <div class="button-row">
-                <button type="submit" class="btn btn-primary">Search</button>
-                <a href="/" class="btn btn-secondary">Clear</a>
+            <div class="button-row mt-2">
+                <button type="submit" class="btn btn-primary px-4">Search</button>
+                <a href="/" class="btn btn-outline-secondary px-4">Clear</a>
             </div>
         </form>
 
-        <h2 class="mb-3">Results</h2>
+        <div class="results-header d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0 results-title">Results</h2>
+            <span class="results-count badge rounded-pill text-bg-dark">
+                <%= quotes.length %> result(s)
+            </span>
+        </div>
 
         <% if (quotes.length === 0) { %>
-            <div class="alert alert-light border">
+            <div class="alert empty-state border">
                 No quotes found.
             </div>
         <% } else { %>
             <% quotes.forEach(q => { %>
                 <div class="quote-box">
-                    <p class="quote-text">"<%= q.quote %>"</p>
+                    <p class="quote-text mb-3">"<%= q.quote %>"</p>
 
-                    <p>
-                        <strong>Author:</strong>
-                        <button
-                            type="button"
-                            class="author-link btn btn-link p-0"
-                            data-authorid="<%= q.authorId %>"
-                            data-bs-toggle="modal"
-                            data-bs-target="#authorModal"
-                        >
-                            <%= q.fullName %>
-                        </button>
-                    </p>
+                    <div class="quote-meta">
+                        <p class="mb-2">
+                            <strong>Author:</strong>
+                            <button
+                                type="button"
+                                class="author-link btn btn-link p-0"
+                                data-bs-toggle="modal"
+                                data-bs-target="#authorModal"
+                                onclick="loadAuthorInfo(<%= q.authorId %>)"
+                            >
+                                <%= q.fullName %>
+                            </button>
+                        </p>
 
-                    <p><strong>Category:</strong> <%= q.category %></p>
-                    <p><strong>Likes:</strong> <%= q.likes %></p>
+                        <div class="badge-row">
+                            <span class="badge text-bg-primary"><%= q.category %></span>
+                            <span class="badge text-bg-success"><%= q.likes %> likes</span>
+                        </div>
+                    </div>
                 </div>
             <% }) %>
         <% } %>
@@ -125,7 +141,7 @@
     <!-- This is my Bootstrap modal -->
     <div class="modal fade" id="authorModal" tabindex="-1" aria-labelledby="authorModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content modal-card">
                 <div class="modal-header">
                     <h5 class="modal-title" id="authorModalLabel">Author Information</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

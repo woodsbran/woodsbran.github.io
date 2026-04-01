@@ -10,7 +10,7 @@ const app = express();
 // I'm telling express to use EJS
 app.set("view engine", "ejs");
 
-// This lets me use files from my public folder like css and js
+// This lets me use files from my public folder like css, js, and images
 app.use(express.static("public"));
 
 // This lets me read form data from the page
