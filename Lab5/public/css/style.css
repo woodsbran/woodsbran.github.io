@@ -1,0 +1,57 @@
+/* I'm just keeping the design simple for now so I can focus on functionality first */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f8fc;
+    color: #222;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+h1, h2 {
+    color: #1d4d7a;
+}
+
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #d9e2ec;
+    margin-bottom: 25px;
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+}
+
+input, select {
+    padding: 8px;
+    width: 250px;
+}
+
+button {
+    background-color: #1d4d7a;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #163a5c;
+}
+
+.quote-box {
+    background-color: white;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #d9e2ec;
+}

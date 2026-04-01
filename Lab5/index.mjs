@@ -30,25 +30,90 @@ const pool = mysql.createPool({
 // This is my home route
 app.get("/", async (req, res) => {
     try {
-        // I'm getting the list of categories from the quotes table
+        // I'm grabbing whatever the user typed or selected from the form
+        const keyword = req.query.keyword || "";
+        const category = req.query.category || "";
+        const authorId = req.query.authorId || "";
+        const minLikes = req.query.minLikes || "";
+        const maxLikes = req.query.maxLikes || "";
+
+        // I'm getting the list of categories from the database for the dropdown
         const [categories] = await pool.query(`
             SELECT DISTINCT category
             FROM q_quotes
             ORDER BY category
         `);
 
-        // I'm getting the full author names from the authors table
+        // I'm getting the full author names from the database for the dropdown
         const [authors] = await pool.query(`
             SELECT authorId, CONCAT(firstName, ' ', lastName) AS fullName
             FROM q_authors
             ORDER BY firstName, lastName
         `);
 
-        // Right now I'm just sending empty quotes until I build the search
+        // This is my main query to get quotes and the author name together
+        let sql = `
+            SELECT q.quoteId,
+                   q.quote,
+                   q.category,
+                   q.likes,
+                   q.authorId,
+                   CONCAT(a.firstName, ' ', a.lastName) AS fullName
+            FROM q_quotes q
+            JOIN q_authors a
+              ON q.authorId = a.authorId
+            WHERE 1
+        `;
+
+        // I'm using this array to safely store the values for the query
+        let params = [];
+
+        // If the user typed a keyword, I'll search inside the quote text
+        if (keyword) {
+            sql += ` AND q.quote LIKE ?`;
+            params.push(`%${keyword}%`);
+        }
+
+        // If the user picked a category, I'll filter by category
+        if (category) {
+            sql += ` AND q.category = ?`;
+            params.push(category);
+        }
+
+        // If the user picked an author, I'll filter by that author
+        if (authorId) {
+            sql += ` AND q.authorId = ?`;
+            params.push(authorId);
+        }
+
+        // If the user entered a minimum likes value, I'll filter for that
+        if (minLikes) {
+            sql += ` AND q.likes >= ?`;
+            params.push(minLikes);
+        }
+
+        // If the user entered a maximum likes value, I'll filter for that
+        if (maxLikes) {
+            sql += ` AND q.likes <= ?`;
+            params.push(maxLikes);
+        }
+
+        // I'm sorting the results from highest likes to lowest
+        sql += ` ORDER BY q.likes DESC`;
+
+        // I'm running the finished query
+        const [quotes] = await pool.query(sql, params);
+
+        // I'm sending everything to the page
         res.render("index", {
             categories,
             authors,
-            quotes: []
+            quotes,
+            keyword,
+            category,
+            authorId,
+            minLikes,
+            maxLikes
         });
 
     } catch (err) {

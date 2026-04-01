@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lab 5 - Quote Finder</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
     <form method="GET" action="/">
         <div>
             <label for="keyword">Keyword:</label>
-            <input type="text" id="keyword" name="keyword">
+            <input type="text" id="keyword" name="keyword" value="<%= keyword %>">
         </div>
 
         <div>
@@ -21,7 +21,9 @@
             <select id="category" name="category">
                 <option value="">All Categories</option>
                 <% categories.forEach(c => { %>
-                    <option value="<%= c.category %>"><%= c.category %></option>
+                    <option value="<%= c.category %>" <%= category === c.category ? "selected" : "" %>>
+                        <%= c.category %>
+                    </option>
                 <% }) %>
             </select>
         </div>
@@ -31,19 +33,21 @@
             <select id="authorId" name="authorId">
                 <option value="">All Authors</option>
                 <% authors.forEach(a => { %>
-                    <option value="<%= a.authorId %>"><%= a.fullName %></option>
+                    <option value="<%= a.authorId %>" <%= String(authorId) === String(a.authorId) ? "selected" : "" %>>
+                        <%= a.fullName %>
+                    </option>
                 <% }) %>
             </select>
         </div>
 
         <div>
             <label for="minLikes">Min Likes:</label>
-            <input type="number" id="minLikes" name="minLikes">
+            <input type="number" id="minLikes" name="minLikes" value="<%= minLikes %>">
         </div>
 
         <div>
             <label for="maxLikes">Max Likes:</label>
-            <input type="number" id="maxLikes" name="maxLikes">
+            <input type="number" id="maxLikes" name="maxLikes" value="<%= maxLikes %>">
         </div>
 
         <button type="submit">Search</button>
@@ -54,7 +58,17 @@
     <h2>Results</h2>
 
     <% if (quotes.length === 0) { %>
-        <p>No quotes to show yet.</p>
+        <p>No quotes found.</p>
+    <% } else { %>
+        <% quotes.forEach(q => { %>
+            <div class="quote-box">
+                <p><strong>Quote:</strong> "<%= q.quote %>"</p>
+                <p><strong>Author:</strong> <%= q.fullName %></p>
+                <p><strong>Category:</strong> <%= q.category %></p>
+                <p><strong>Likes:</strong> <%= q.likes %></p>
+            </div>
+            <hr>
+        <% }) %>
     <% } %>
 
 </body>
