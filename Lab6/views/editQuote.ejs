@@ -1,0 +1,43 @@
+<%- include("partials/header") %>
+
+<div class="form-card">
+  <h1 class="mb-4">Edit Quote</h1>
+
+  <form method="POST" action="/quotes/edit/<%= quoteRecord.quoteId %>">
+    <div class="mb-3">
+      <label class="form-label">Quote</label>
+      <textarea name="quote" class="form-control" rows="4" required><%= quoteRecord.quote %></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Author</label>
+      <select name="authorId" class="form-select" required>
+        <option value="">Select an Author</option>
+        <% authors.forEach(author => { %>
+          <option value="<%= author.authorId %>" <%= author.authorId == quoteRecord.authorId ? "selected" : "" %>>
+            <%= author.firstName %> <%= author.lastName %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <select name="categoryId" class="form-select" required>
+        <option value="">Select a Category</option>
+        <% categories.forEach(category => { %>
+          <option value="<%= category.categoryId %>" <%= category.categoryId == quoteRecord.categoryId ? "selected" : "" %>>
+            <%= category.category %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+      <button type="submit" class="btn btn-warning">Update Quote</button>
+      <a href="/quotes" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include("partials/footer") %>
