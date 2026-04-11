@@ -1,0 +1,61 @@
+<%- include("partials/header") %>
+
+<div class="form-card">
+  <h1 class="mb-4">Add New Author</h1>
+
+  <form method="POST" action="/authors/new">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">First Name</label>
+        <input type="text" name="firstName" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Last Name</label>
+        <input type="text" name="lastName" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Date of Birth</label>
+        <input type="date" name="dob" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Date of Death</label>
+        <input type="date" name="dod" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Profession</label>
+        <input type="text" name="profession" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Country</label>
+        <input type="text" name="country" class="form-control" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Gender</label>
+        <input type="text" name="gender" class="form-control" required>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Portrait URL</label>
+        <input type="text" name="portrait" class="form-control" required>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Biography</label>
+        <textarea name="biography" class="form-control" rows="5" required></textarea>
+      </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+      <button type="submit" class="btn btn-primary">Add Author</button>
+      <a href="/authors" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include("partials/footer") %>
