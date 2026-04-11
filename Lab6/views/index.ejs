@@ -1,0 +1,41 @@
+<%- include("partials/header") %>
+
+<div class="hero-box text-center p-5 rounded shadow-sm">
+  <h1 class="display-5 fw-bold mb-3">Famous Quotes Admin Dashboard</h1>
+  <p class="lead mb-4">
+    Here I can manage the authors and quotes in the database.
+  </p>
+
+  <div class="d-flex justify-content-center gap-3 flex-wrap">
+    <a href="/authors" class="btn btn-primary btn-lg">Manage Authors</a>
+    <a href="/quotes" class="btn btn-success btn-lg">Manage Quotes</a>
+  </div>
+</div>
+
+<div class="row mt-5 g-4">
+  <div class="col-md-6">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">Authors</h3>
+        <p class="card-text">
+          On this page I can add authors, edit them, and delete them.
+        </p>
+        <a href="/authors" class="btn btn-outline-primary">Go to Authors</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">Quotes</h3>
+        <p class="card-text">
+          On this page I can add quotes, edit them, and delete them.
+        </p>
+        <a href="/quotes" class="btn btn-outline-success">Go to Quotes</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>
