@@ -1,12 +1,12 @@
 /************************************************
- * Here I am importing the packages I need.
+ * Here I import the packages I need.
  ************************************************/
 import express from "express";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 
 /************************************************
- * Here I load my environment variables.
+ * Here I load the variables from my .env file.
  ************************************************/
 dotenv.config();
 
@@ -16,9 +16,9 @@ dotenv.config();
 const app = express();
 
 /************************************************
- * Here I set my port.
- * If Render gives me a port, I use it.
- * Otherwise I use 3000 locally.
+ * Here I set the port.
+ * Render gives a port when deployed.
+ * Locally I use 3000.
  ************************************************/
 const PORT = process.env.PORT || 3000;
 
@@ -28,18 +28,18 @@ const PORT = process.env.PORT || 3000;
 app.set("view engine", "ejs");
 
 /************************************************
- * Here I let my app read form data.
+ * Here I let Express read form data.
  ************************************************/
 app.use(express.urlencoded({ extended: true }));
 
 /************************************************
- * Here I tell Express where my static files are.
+ * Here I connect my public folder for CSS.
  ************************************************/
 app.use(express.static("public"));
 
 /************************************************
- * Here I connect to my MySQL database.
- * This is the Famous Quotes database my app uses.
+ * Here I create my MySQL connection pool.
+ * This is how my app talks to the database.
  ************************************************/
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -53,7 +53,7 @@ const pool = mysql.createPool({
 
 /************************************************
  * HOME PAGE
- * This is my admin dashboard.
+ * This is my main admin dashboard.
  ************************************************/
 app.get("/", async (req, res) => {
   res.render("index");
@@ -61,8 +61,8 @@ app.get("/", async (req, res) => {
 
 /************************************************
  * AUTHORS PAGE
- * Here I get all authors from the database
- * so I can show them in a table.
+ * Here I get all authors so I can show them
+ * in a table on the authors page.
  ************************************************/
 app.get("/authors", async (req, res) => {
   try {
@@ -133,7 +133,8 @@ app.post("/authors/new", async (req, res) => {
 
 /************************************************
  * SHOW EDIT AUTHOR FORM
- * Here I get one author and pre-fill the form.
+ * Here I get one author by id and send it
+ * into the form so the values are pre-filled.
  ************************************************/
 app.get("/authors/edit/:authorId", async (req, res) => {
   try {
@@ -160,7 +161,7 @@ app.get("/authors/edit/:authorId", async (req, res) => {
 
 /************************************************
  * UPDATE AUTHOR
- * Here I save the edited author changes.
+ * Here I save the edits made to the author.
  ************************************************/
 app.post("/authors/edit/:authorId", async (req, res) => {
   try {
@@ -214,7 +215,7 @@ app.post("/authors/edit/:authorId", async (req, res) => {
 
 /************************************************
  * DELETE AUTHOR
- * Here I delete an author by id.
+ * Here I delete the selected author.
  ************************************************/
 app.get("/authors/delete/:authorId", async (req, res) => {
   try {
@@ -230,20 +231,22 @@ app.get("/authors/delete/:authorId", async (req, res) => {
     res.redirect("/authors");
   } catch (error) {
     console.log(error);
-    res.send("Error deleting author.");
+    res.send("Error deleting author. If this author has quotes attached, delete those quotes first.");
   }
 });
 
 /************************************************
  * QUOTES PAGE
  * Here I join quotes with authors and categories
- * so the table shows useful information.
+ * so the table shows readable information.
  ************************************************/
 app.get("/quotes", async (req, res) => {
   try {
     const sql = `
       SELECT q.quoteId,
              q.quote,
+             q.authorId,
+             q.categoryId,
              a.firstName,
              a.lastName,
              c.category
@@ -264,9 +267,8 @@ app.get("/quotes", async (req, res) => {
 
 /************************************************
  * SHOW ADD QUOTE FORM
- * Here I get authors and categories from the db
- * because the rubric says those lists must come
- * from the database.
+ * Here I load the authors list and categories
+ * list from the database for the dropdowns.
  ************************************************/
 app.get("/quotes/new", async (req, res) => {
   try {
@@ -294,6 +296,7 @@ app.get("/quotes/new", async (req, res) => {
 
 /************************************************
  * ADD QUOTE
+ * Here I insert a new quote into the database.
  ************************************************/
 app.post("/quotes/new", async (req, res) => {
   try {
@@ -316,9 +319,9 @@ app.post("/quotes/new", async (req, res) => {
 
 /************************************************
  * SHOW EDIT QUOTE FORM
- * Here I get the current quote plus the author
- * list and category list so the form can be
- * pre-filled and pre-selected.
+ * Here I get the quote plus the author and
+ * category dropdown data so everything is
+ * pre-filled correctly.
  ************************************************/
 app.get("/quotes/edit/:quoteId", async (req, res) => {
   try {
@@ -363,6 +366,7 @@ app.get("/quotes/edit/:quoteId", async (req, res) => {
 
 /************************************************
  * UPDATE QUOTE
+ * Here I save the quote edits.
  ************************************************/
 app.post("/quotes/edit/:quoteId", async (req, res) => {
   try {
@@ -388,6 +392,7 @@ app.post("/quotes/edit/:quoteId", async (req, res) => {
 
 /************************************************
  * DELETE QUOTE
+ * Here I delete the selected quote.
  ************************************************/
 app.get("/quotes/delete/:quoteId", async (req, res) => {
   try {
