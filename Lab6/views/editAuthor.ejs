@@ -1,0 +1,61 @@
+<%- include("partials/header") %>
+
+<div class="form-card">
+  <h1 class="mb-4">Edit Author</h1>
+
+  <form method="POST" action="/authors/edit/<%= author.authorId %>">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">First Name</label>
+        <input type="text" name="firstName" class="form-control" value="<%= author.firstName %>" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Last Name</label>
+        <input type="text" name="lastName" class="form-control" value="<%= author.lastName %>" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Date of Birth</label>
+        <input type="date" name="dob" class="form-control" value="<%= author.dob ? author.dob.toISOString().split('T')[0] : '' %>">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Date of Death</label>
+        <input type="date" name="dod" class="form-control" value="<%= author.dod ? author.dod.toISOString().split('T')[0] : '' %>">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Profession</label>
+        <input type="text" name="profession" class="form-control" value="<%= author.profession %>" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Country</label>
+        <input type="text" name="country" class="form-control" value="<%= author.country %>" required>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Gender</label>
+        <input type="text" name="gender" class="form-control" value="<%= author.gender %>" required>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Portrait URL</label>
+        <input type="text" name="portrait" class="form-control" value="<%= author.portrait %>" required>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Biography</label>
+        <textarea name="biography" class="form-control" rows="5" required><%= author.biography %></textarea>
+      </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+      <button type="submit" class="btn btn-warning">Update Author</button>
+      <a href="/authors" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include("partials/footer") %>
